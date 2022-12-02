@@ -15,7 +15,7 @@ By using Scrapy framework, obtain information about cars from pp.lv website. The
 
 ## About project
 
-To fulfill task, I obtained API endpoints from website and create Web Spider which is crawling through API endpoints.
+To fulfill task, I obtained API endpoints from website and create Web Spider which is scraping through API endpoints.
 
 ## Install
 
@@ -43,4 +43,4 @@ After about five minutes ( depends on how much of pages of data exist) you will 
 
 ![My Image](pictures/dataset.PNG)
 
-## Happy Crawling!
+## Happy scraping!
