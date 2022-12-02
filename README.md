@@ -1,6 +1,6 @@
 # pp.lv WEB Scraper
 
-![My Image](pictures/1280px-Webcrawler_logo.svg.png)
+![My Image](pictures/spider_logo.png)
 
 ## Task:
 

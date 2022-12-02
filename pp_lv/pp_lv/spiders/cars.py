@@ -22,63 +22,63 @@ class CarsSpider(scrapy.Spider):
 
 
     def parse(self, response) -> None:
-        data = json.loads(response.body)
-        if len(data["content"]["data"]) <= 0:
+        content= json.loads(response.body)
+        if len(content["content"]["data"]) <= 0:
             raise CloseSpider('All pages are crawled')
-        self.data_iterator(data)
+        self.data_iterator(content)
 
 
-    def data_iterator(self, data) -> None:
+    def data_iterator(self, content) -> None:
         """Iterates through given JSON data, and write the necessary data to CSV file"""      
-        for _ in data["content"]["data"]:
-            raw_car_info = {}
-            brand = _["category"]["parent"]["parent"]["name"]
-            sub_brand = _["category"]["parent"]["name"]
-            model = _["category"]["name"]
-            for car in _["adFilterValues"]:
+        for element in content["content"]["data"]:
+            data = {}
+            brand = element["category"]["parent"]["parent"]["name"]
+            sub_brand = element["category"]["parent"]["name"]
+            model = element["category"]["name"]
+            for car in element["adFilterValues"]:
                 key = car["filter"]["name"]
                 if car["value"] is None:
                     value = car["textValue"]
                 else:
                     value = car["value"]["displayValue"]
-                raw_car_info[key] = value
+                data[key] = value
 
-            car_data = []
+            car_info = []
             
             if brand != "Vieglie auto":
-                    car_data.append(brand)
-            car_data.append(sub_brand)
-            car_data.append(model)
+                    car_info.append(brand)
+            car_info.append(sub_brand)
+            car_info.append(model)
 
-            if 'Izlaiduma gads' in raw_car_info:
-                car_data.append(raw_car_info['Izlaiduma gads'])
+            if 'Izlaiduma gads' in data:
+                car_info.append(data['Izlaiduma gads'])
             else:
-                car_data.append("No data about Year")
+                car_info.append("No data about Year")
 
 
-            if 'Nobraukums, km' in raw_car_info:
-                car_data.append(raw_car_info['Nobraukums, km'])
+            if 'Nobraukums, km' in data:
+                car_info.append(data['Nobraukums, km'])
             else:
-                car_data.append("No data about Mileage")
+                car_info.append("No data about Mileage")
 
 
-            if 'VIN kods' in raw_car_info:
-                car_data.append(raw_car_info['VIN kods'])
+            if 'VIN kods' in data:
+                car_info.append(data['VIN kods'])
             else:
-                car_data.append("No data about VIN")
+                car_info.append("No data about VIN")
 
 
-            if 'Auto numurs' in raw_car_info:
-                car_data.append(raw_car_info['Auto numurs'])
+            if 'Auto numurs' in data:
+                car_info.append(data['Auto numurs'])
             else:
-                car_data.append("No data about Number Plate")
+                car_info.append("No data about Number Plate")
             
-            if len(car_data) > 6:
-                car_data.pop(1)
+            if len(car_info) > 6:
+                car_info.pop(1)
             
             with open(OUTPUT_FILENAME, 'a', newline='', encoding='utf-8') as f:
                 writer = csv.writer(f)
-                writer.writerows([car_data])
+                writer.writerows([car_info])
 
 
     def csv_headers(self) -> None:
