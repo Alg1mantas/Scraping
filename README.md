@@ -4,7 +4,7 @@
 
 ## Task:
 
-By using Scrapy framework, obtain information about cars from pp.lv website. There suppose to be information about:
+The task involved utilizing the Scrapy framework to gather information about cars from the pp.lv website. The information targeted includes details such as the brand, model, year (if available), mileage, VIN (if available), and plate number (if available).
 
 - Brand
 - Model
@@ -15,7 +15,7 @@ By using Scrapy framework, obtain information about cars from pp.lv website. The
 
 ## About project
 
-To fulfill task, I obtained API endpoints from website and create Web Spider which is scraping through API endpoints.
+To tackle this task, I leveraged API endpoints obtained from the website. I then developed a web spider using the Scrapy framework, designed to efficiently scrape through these API endpoints. This approach ensured systematic extraction of the desired car information, contributing to an active and ongoing project development on the repository.
 
 ## Install
 
